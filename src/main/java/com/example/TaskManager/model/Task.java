@@ -3,6 +3,7 @@ package com.example.TaskManager.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,5 @@ public class Task implements Serializable {
     private String title;
     private String description;
     private boolean completed;
-
-    public void setTitle(String testTask) {
-    }
+    private LocalDateTime dueDate; // Добавлено
 }

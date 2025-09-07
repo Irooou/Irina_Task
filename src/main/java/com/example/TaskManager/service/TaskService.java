@@ -16,11 +16,6 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final RabbitTemplate rabbitTemplate;
 
-    public TaskService(TaskRepository taskRepository, RabbitTemplate rabbitTemplate) {
-        this.taskRepository = taskRepository;
-        this.rabbitTemplate = rabbitTemplate;
-    }
-
     @Cacheable(value = "tasks")
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
