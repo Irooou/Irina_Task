@@ -1,0 +1,67 @@
+package com.example.TaskManager.controller;
+
+import com.example.TaskManager.model.User;
+import com.example.TaskManager.service.UserService;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
+class UserControllerTest {
+
+    @Mock
+    private UserService userService;
+
+    @InjectMocks
+    private UserController userController;
+
+    @Test
+    void getAllUsers_ReturnsUsersList() {
+        // Arrange
+        User user = new User();
+        user.setId(1L);
+        user.setName("Alice");
+        user.setEmail("alice@example.com");
+
+        when(userService.getAllUsers()).thenReturn(List.of(user));
+
+        // Act
+        ResponseEntity<List<User>> response = userController.getAllUsers();
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, response.getBody().size());
+        assertEquals("Alice", response.getBody().get(0).getName());
+        verify(userService, times(1)).getAllUsers();
+    }
+
+    @Test
+    void createUser_ReturnsCreatedUser() {
+        // Arrange
+        User newUser = new User();
+        newUser.setName("Bob");
+        newUser.setEmail("bob@example.com");
+
+        User savedUser = new User();
+        savedUser.setId(1L);
+        savedUser.setName(newUser.getName());
+        savedUser.setEmail(newUser.getEmail());
+
+        when(userService.createUser(any(User.class))).thenReturn(savedUser);
+
+        // Act
+        ResponseEntity<User> response = userController.createUser(newUser);
+
+        // Assert
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response.getBody().getId());
+        assertEquals("Bob", response.getBody().getName());
+        verify(userService, times(1)).createUser(any(User.class));
+    }
+}

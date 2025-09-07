@@ -1,11 +1,12 @@
 package com.example.TaskManager.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "\"task\"") // Экранирование двойными кавычками
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
