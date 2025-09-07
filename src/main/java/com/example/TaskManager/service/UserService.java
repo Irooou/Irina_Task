@@ -2,15 +2,17 @@ package com.example.TaskManager.service;
 
 import com.example.TaskManager.model.User;
 import com.example.TaskManager.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserService implements Serializable {
     private final UserRepository userRepository;
 
-    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

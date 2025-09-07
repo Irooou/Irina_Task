@@ -19,11 +19,15 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.redisson:redisson-spring-boot-starter:3.27.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+	testImplementation 'com.h2database:h2'
+	testImplementation 'org.mockito:mockito-core:5.8.0'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 }

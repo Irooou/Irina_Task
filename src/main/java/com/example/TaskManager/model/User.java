@@ -1,12 +1,13 @@
 package com.example.TaskManager.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "\"user\"") // Экранирование двойными кавычками
-// Или: @Table(name = "[user]") // Для H2 можно и так
+@Table(name = "app_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
