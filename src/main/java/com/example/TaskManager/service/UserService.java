@@ -2,18 +2,14 @@ package com.example.TaskManager.service;
 
 import com.example.TaskManager.model.User;
 import com.example.TaskManager.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
